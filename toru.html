@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Toru | Anushka Suryawanshi</title>
+    <meta name="description" content="Toru is an ambient lamp designed to shape quiet moments." />
+    <link rel="stylesheet" href="toru.css?v=1" />
+  </head>
+  <body>
+    <main class="toru-hero">
+      <img class="toru-hero__image" src="assets/toru-hero.png" alt="Toru ambient lamp glowing against a dark background" />
+
+      <header class="toru-nav">
+        <a href="index.html#work" aria-label="Back to selected work">← Back</a>
+        <span>Object / Lighting</span>
+        <button class="summary-trigger" id="summaryTrigger" type="button" aria-controls="summaryPanel" aria-expanded="true">Project summary</button>
+      </header>
+
+      <aside class="summary-panel is-open" id="summaryPanel" aria-labelledby="summaryTitle">
+        <div class="summary-panel__topline">
+          <span>01 / Overview</span>
+          <button class="summary-close" id="summaryClose" type="button" aria-label="Close project summary">×</button>
+        </div>
+        <div class="summary-panel__content">
+          <p class="summary-kicker">Ambient object / Toru</p>
+          <h1 id="summaryTitle">Most homes are lit for visibility, not for moments.</h1>
+          <div class="summary-copy">
+            <p>Late dinners, quiet conversations, reading before bed, or simply sitting with a cup of tea often happen under bright overhead lights designed for tasks rather than atmosphere. The result is a space that feels illuminated, but not comfortable.</p>
+            <p><strong>TORU was created to change that.</strong> Its soft, downward glow creates a gentle pool of light that accompanies a moment rather than dominating it. TORU is not designed to light a room. It is designed to shape a moment.</p>
+          </div>
+        </div>
+        <div class="summary-panel__footer">
+          <span>Industrial design</span>
+          <span>2024</span>
+        </div>
+      </aside>
+    </main>
+
+    <script src="toru.js?v=1"></script>
+  </body>
+</html>

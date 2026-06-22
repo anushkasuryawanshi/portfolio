@@ -8,7 +8,7 @@
       name="description"
       content="Multidisciplinary design portfolio by Anushka Suryawanshi."
     />
-    <link rel="stylesheet" href="styles.css?v=18" />
+    <link rel="stylesheet" href="styles.css?v=19" />
   </head>
   <body>
     <nav class="top-nav" id="topNav" aria-label="Primary navigation">
@@ -38,29 +38,29 @@
 
       <section class="projects" aria-label="Selected projects">
         <div class="projects-row" id="projectsRow">
-          <article class="project-card">
+          <a class="project-card" href="toru.html" data-project="toru" aria-label="View the Toru project">
             <img src="assets/project-toru.png" alt="Toru ambient lamp" />
             <div class="project-meta">
               <h3>Toru</h3>
               <p>Object / Lighting</p>
             </div>
-          </article>
+          </a>
 
-          <article class="project-card project-card--wide">
+          <a class="project-card project-card--wide" href="earthy.html" data-project="earthy" aria-label="View the Earthy project">
             <img src="assets/project-earthy.png" alt="Earthy packaging system" />
             <div class="project-meta">
               <h3>Earthy</h3>
               <p>Packaging / Brand System</p>
             </div>
-          </article>
+          </a>
 
-          <article class="project-card">
+          <a class="project-card" href="frame.html" data-project="frame" aria-label="View The Frame project">
             <img src="assets/project-frame.png" alt="The Frame print system" />
             <div class="project-meta">
               <h3>The Frame</h3>
               <p>Print / Spatial Branding</p>
             </div>
-          </article>
+          </a>
 
           <article class="project-card project-card--wide">
             <img src="assets/project-walkway.png" alt="Walkway canopy graphics" />
@@ -70,21 +70,21 @@
             </div>
           </article>
 
-          <article class="project-card">
+          <a class="project-card" href="#chandigarh-chair" data-project="chair" aria-label="View the Chandigarh Chair project">
             <img src="assets/project-chair.jpg" alt="Chandigarh Chair study" />
             <div class="project-meta">
               <h3>Chandigarh Chair</h3>
               <p>Object Study / Furniture</p>
             </div>
-          </article>
+          </a>
 
-          <article class="project-card">
+          <a class="project-card" href="#retrace" data-project="retrace" aria-label="View the Retrace project">
             <img src="assets/project-retrace.jpg" alt="Retrace brochure box" />
             <div class="project-meta">
               <h3>Retrace</h3>
               <p>Packaging / Brand Object</p>
             </div>
-          </article>
+          </a>
 
           <article class="project-card project-card--wide">
             <img src="assets/project-sunthings.jpg" alt="Sunthings packaging" />
@@ -194,6 +194,33 @@
       </section>
     </main>
 
-    <script src="script.js?v=18"></script>
+    <div class="project-modal-layer" id="projectModalLayer" aria-hidden="true">
+      <section
+        class="project-modal"
+        id="projectModal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="modalTitle"
+      >
+        <div class="project-modal__images" id="modalImages" tabindex="0" aria-label="Project image gallery"></div>
+
+        <aside class="project-modal__details">
+          <div class="project-modal__index">01 / Overview</div>
+          <div class="project-modal__copy">
+            <p class="project-modal__kicker" id="modalKicker"></p>
+            <h2 id="modalTitle"></h2>
+            <div class="project-modal__body" id="modalBody"></div>
+          </div>
+          <footer class="project-modal__footer">
+            <span id="modalDiscipline"></span>
+            <span id="modalMeta"></span>
+          </footer>
+        </aside>
+
+        <button class="project-modal__close" id="modalClose" type="button" aria-label="Close project">×</button>
+      </section>
+    </div>
+
+    <script src="script.js?v=19"></script>
   </body>
 </html>

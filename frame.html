@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Frame | Anushka Suryawanshi</title>
+    <meta
+      name="description"
+      content="The Frame is a brochure for Pooja Crafted Homes' hospitality collaboration with JW Marriott."
+    />
+    <link rel="stylesheet" href="frame.css?v=1" />
+  </head>
+  <body>
+    <main class="frame-hero">
+      <img
+        class="frame-hero__image"
+        src="assets/frame-hero.png"
+        alt="Layered black paper construction created for The Frame brochure cover"
+      />
+
+      <header class="frame-nav">
+        <a href="index.html#work" aria-label="Back to selected work">← Back</a>
+        <span>Print / Spatial Branding</span>
+        <button
+          class="summary-trigger"
+          id="summaryTrigger"
+          type="button"
+          aria-controls="summaryPanel"
+          aria-expanded="true"
+        >
+          Project summary
+        </button>
+      </header>
+
+      <aside class="summary-panel is-open" id="summaryPanel" aria-labelledby="summaryTitle">
+        <div class="summary-panel__topline">
+          <span>01 / Overview</span>
+          <button class="summary-close" id="summaryClose" type="button" aria-label="Close project summary">×</button>
+        </div>
+
+        <div class="summary-panel__content">
+          <p class="summary-kicker">Hospitality brochure / The Frame</p>
+          <h1 id="summaryTitle">A building conceived as a frame, translated into print.</h1>
+
+          <div class="summary-copy">
+            <p>
+              The Frame is a brochure for Pooja Crafted Homes' hospitality collaboration with JW Marriott. As part of the design team, I worked on the brochure cover, helping develop its layered construction and print production strategy. The building itself acts as a frame—filtering light, views, and movement—and the cover translates this concept into a tactile visual language through depth, layering, and material expression.
+            </p>
+          </div>
+        </div>
+
+        <div class="summary-panel__footer">
+          <span>Print production</span>
+          <span>The Frame</span>
+        </div>
+      </aside>
+    </main>
+
+    <script src="frame.js?v=1"></script>
+  </body>
+</html>
