@@ -4,6 +4,7 @@ const closeButton = document.getElementById("summaryClose");
 
 function setPanel(open) {
   panel.classList.toggle("is-open", open);
+  document.body.classList.toggle("summary-open", open);
   trigger.setAttribute("aria-expanded", String(open));
 }
 

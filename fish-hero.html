@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Anushka Suryawanshi | Interactive Hero</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #010203;
+        --ink: #f5f7ff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        min-height: 100%;
+        margin: 0;
+        overflow: hidden;
+        background: var(--paper);
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .hero {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+        min-height: 100svh;
+        background:
+          radial-gradient(circle at 50% 50%, rgba(12, 19, 32, 0.62), transparent 34%),
+          radial-gradient(circle at 18% 50%, rgba(29, 83, 184, 0.18), transparent 30%),
+          radial-gradient(circle at 82% 50%, rgba(37, 196, 190, 0.15), transparent 28%),
+          var(--paper);
+        cursor: crosshair;
+        overflow: hidden;
+      }
+
+      .hero canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+
+      .hero-label {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 1vw;
+        height: 1vh;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        transform: translate(-50%, -50%);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero {
+          cursor: default;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="hero" aria-labelledby="hero-title">
+      <canvas id="fishHero"></canvas>
+      <h1 class="hero-label" id="hero-title">ANUSHKA SURYAWANSHI</h1>
+    </main>
+
+    <script type="module">
+      const canvas = document.querySelector("#fishHero");
+      const ctx = canvas.getContext("2d");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+      const NAME = "ANUSHKA SURYAWANSHI";
+      const COUNT = 560;
+      const palette = ["#3772ff", "#5b91ff", "#58d9f4", "#36e0c2", "#f6d475", "#ef7ea8"];
+      const pointer = {
+        x: window.innerWidth / 2,
+        y: window.innerHeight / 2,
+        tx: window.innerWidth / 2,
+        ty: window.innerHeight / 2,
+        active: false,
+      };
+
+      let dpr = 1;
+      let width = 0;
+      let height = 0;
+      let particles = [];
+      let pretext = null;
+      let preparedName = null;
+      let nameMetrics = { width: 0, height: 0, lineCount: 1 };
+
+      async function loadPretext() {
+        try {
+          const moduleLoad = import("https://esm.sh/@chenglou/pretext@latest");
+          const timeout = new Promise((resolve) => {
+            window.setTimeout(() => resolve(null), 800);
+          });
+          pretext = await Promise.race([moduleLoad, timeout]);
+        } catch (error) {
+          pretext = null;
+        }
+      }
+
+      function randomBetween(min, max) {
+        return min + Math.random() * (max - min);
+      }
+
+      function seededRandom(seed) {
+        const x = Math.sin(seed * 12.9898) * 43758.5453;
+        return x - Math.floor(x);
+      }
+
+      function placeParticle(index) {
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const edgeBand = index < COUNT * 0.78;
+        const innerField = index >= COUNT * 0.78 && index < COUNT * 0.93;
+
+        if (edgeBand) {
+          const angle = index * 2.399963229728653 + seededRandom(index + 4) * 0.08;
+          const squareness = 3.7;
+          const cos = Math.cos(angle);
+          const sin = Math.sin(angle);
+          const signedPow = (value) =>
+            Math.sign(value) * Math.pow(Math.abs(value), 2 / squareness);
+          const band = 0.88 + seededRandom(index + 19) * 0.22;
+          const ripple = Math.sin(index * 0.17) * 9 + Math.cos(index * 0.071) * 12;
+          const sideBias = Math.abs(cos);
+
+          return {
+            x: centerX + signedPow(cos) * width * (0.38 + sideBias * 0.035) * band + ripple,
+            y: centerY + signedPow(sin) * height * 0.36 * band - ripple * 0.25,
+          };
+        }
+
+        if (innerField) {
+          const x = centerX + (seededRandom(index + 41) - 0.5) * width * 0.7;
+          const y = centerY + (seededRandom(index + 67) - 0.5) * height * 0.52;
+          const voidX = Math.abs((x - centerX) / (width * 0.31));
+          const voidY = Math.abs((y - centerY) / (height * 0.21));
+
+          if (voidX < 1 && voidY < 1) {
+            return {
+              x: centerX + Math.sign(x - centerX || 1) * width * (0.33 + seededRandom(index + 3) * 0.11),
+              y: centerY + (seededRandom(index + 8) - 0.5) * height * 0.5,
+            };
+          }
+
+          return { x, y };
+        }
+
+        return {
+          x: seededRandom(index + 101) * width,
+          y: seededRandom(index + 133) * height,
+        };
+      }
+
+      function createParticle(index) {
+        const aspect = 0.35 + seededRandom(index + 13) * 3.2;
+        const baseArea = 3.5 + seededRandom(index + 29) * 12;
+        const baseW = Math.sqrt(baseArea * aspect);
+        const baseH = baseW / aspect;
+        const home = placeParticle(index);
+        const angle = index * 0.49;
+        const depth = 0.72 + seededRandom(index + 7) * 0.72;
+        const colorRoll = seededRandom(index + 43);
+        const paletteIndex =
+          colorRoll > 0.982
+            ? 5
+            : colorRoll > 0.962
+              ? 4
+              : colorRoll > 0.88
+                ? 3
+                : colorRoll > 0.62
+                  ? 2
+                  : colorRoll > 0.3
+                    ? 1
+                    : 0;
+
+        return {
+          homeX: home.x,
+          homeY: home.y,
+          x: home.x + (seededRandom(index + 31) - 0.5) * 18,
+          y: home.y + (seededRandom(index + 37) - 0.5) * 18,
+          vx: 0,
+          vy: 0,
+          baseW,
+          baseH,
+          w: baseW,
+          h: baseH,
+          rotation: 0,
+          spin: 0,
+          orbit: angle,
+          orbitSpeed: 0.002 + seededRandom(index + 53) * 0.006,
+          offset: 28 + seededRandom(index + 59) * 92,
+          depth,
+          phase: index * 0.47,
+          color: palette[paletteIndex],
+          alpha: 0.22 + seededRandom(index + 71) * 0.4,
+        };
+      }
+
+      function seedParticles() {
+        particles = Array.from({ length: COUNT }, (_, index) =>
+          createParticle(index)
+        );
+      }
+
+      function getNameFont() {
+        const size = Math.max(18, Math.min(width * 0.042, 68));
+        return {
+          size,
+          lineHeight: size * 1.05,
+          font: `700 ${size}px Arial, Helvetica, sans-serif`,
+        };
+      }
+
+      function measureName() {
+        const { font, lineHeight } = getNameFont();
+        if (pretext?.prepare && pretext?.layout) {
+          preparedName = pretext.prepare(NAME, font);
+          nameMetrics = pretext.layout(preparedName, width * 0.82, lineHeight);
+          return;
+        }
+
+        ctx.font = font;
+        nameMetrics = {
+          width: ctx.measureText(NAME).width,
+          height: lineHeight,
+          lineCount: 1,
+        };
+      }
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = Math.round(width * dpr);
+        canvas.height = Math.round(height * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        if (!particles.length) {
+          seedParticles();
+        } else {
+          particles.forEach((particle, index) => {
+            const home = placeParticle(index);
+            particle.homeX = home.x;
+            particle.homeY = home.y;
+            particle.x = Math.min(Math.max(particle.x, 0), width);
+            particle.y = Math.min(Math.max(particle.y, 0), height);
+          });
+        }
+
+        pointer.x = pointer.tx = Math.min(pointer.x, width);
+        pointer.y = pointer.ty = Math.min(pointer.y, height);
+        measureName();
+      }
+
+      function updatePointer(clientX, clientY) {
+        pointer.tx = clientX;
+        pointer.ty = clientY;
+        pointer.active = true;
+      }
+
+      window.addEventListener("pointermove", (event) => {
+        updatePointer(event.clientX, event.clientY);
+      });
+
+      window.addEventListener("pointerleave", () => {
+        pointer.active = false;
+      });
+
+      window.addEventListener("pointerdown", (event) => {
+        updatePointer(event.clientX, event.clientY);
+      });
+
+      window.addEventListener("resize", resize);
+
+      function drawName() {
+        const { font } = getNameFont();
+        const centerX = width / 2;
+        const centerY = height / 2;
+
+        ctx.save();
+        ctx.shadowColor = "rgba(0, 0, 0, 0.82)";
+        ctx.shadowBlur = 32;
+        ctx.font = font;
+        ctx.fillStyle = "#f5f7ff";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.letterSpacing = "0px";
+        ctx.fillText(NAME, centerX, centerY);
+
+        ctx.restore();
+      }
+
+      function drawParticle(particle, scale, alpha, glow) {
+        ctx.save();
+        ctx.translate(particle.x, particle.y);
+        ctx.rotate(particle.rotation);
+        ctx.globalAlpha = alpha;
+        if (glow > 0.18) {
+          ctx.shadowColor = particle.color;
+          ctx.shadowBlur = 5 + glow * 15;
+        }
+        ctx.fillStyle = particle.color;
+        ctx.fillRect(
+          (-particle.baseW * scale) / 2,
+          (-particle.baseH * scale) / 2,
+          particle.baseW * scale,
+          particle.baseH * scale
+        );
+        ctx.restore();
+      }
+
+      function tick(time) {
+        pointer.x += (pointer.tx - pointer.x) * 0.16;
+        pointer.y += (pointer.ty - pointer.y) * 0.16;
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = "#010203";
+        ctx.fillRect(0, 0, width, height);
+
+        const centerX = width / 2;
+        const centerY = height / 2;
+        const radius = Math.min(width, height) * 0.28;
+        const calmRadius = Math.max(width, height) * 0.46;
+        const speed = reduceMotion.matches ? 0.02 : 1;
+        const fieldFollow = pointer.active ? 1 : 0;
+        const parallaxX = (pointer.x - centerX) * 0.034 * fieldFollow;
+        const parallaxY = (pointer.y - centerY) * 0.026 * fieldFollow;
+
+        for (const particle of particles) {
+          const homeDx = pointer.x - particle.homeX;
+          const homeDy = pointer.y - particle.homeY;
+          const homeDistance = Math.hypot(homeDx, homeDy) || 1;
+          const lens = Math.exp(-(homeDistance * homeDistance) / (radius * radius));
+          const proximity = pointer.active ? lens : 0;
+          const homeProximity = pointer.active
+            ? Math.max(
+                0,
+                1 -
+                  homeDistance / calmRadius
+              )
+            : 0;
+
+          particle.orbit += particle.orbitSpeed * speed;
+          const currentOffset =
+            particle.offset *
+            (0.68 + proximity * 0.42 + homeProximity * 0.12) *
+            particle.depth;
+          const schoolX =
+            pointer.x +
+            Math.cos(particle.orbit + particle.phase) * currentOffset;
+          const schoolY =
+            pointer.y +
+            Math.sin(particle.orbit * 1.25 + particle.phase) * currentOffset;
+          const driftX = Math.cos(time * 0.0005 + particle.phase) * 7;
+          const driftY = Math.sin(time * 0.0006 + particle.phase) * 7;
+
+          const pull = pointer.active
+            ? Math.min(0.82, proximity * 0.72 + homeProximity * 0.22)
+            : 0;
+          const flowX = Math.sin(time * 0.00024 + particle.phase) * 5;
+          const flowY = Math.cos(time * 0.0002 + particle.phase * 0.7) * 4;
+          const homeX = particle.homeX + parallaxX * particle.depth + flowX;
+          const homeY = particle.homeY + parallaxY * particle.depth + flowY;
+          const targetX = homeX * (1 - pull) + (schoolX + driftX) * pull;
+          const targetY = homeY * (1 - pull) + (schoolY + driftY) * pull;
+          const force = reduceMotion.matches ? 0.018 : 0.038 + pull * 0.105;
+
+          particle.vx += (targetX - particle.x) * force;
+          particle.vy += (targetY - particle.y) * force;
+          particle.vx *= 0.78;
+          particle.vy *= 0.78;
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+          particle.rotation = 0;
+
+          const scale = 0.72 + proximity * 9.6 + homeProximity * 1.55;
+          const sideGlow = Math.abs((particle.homeX - centerX) / (width * 0.5));
+          const alpha = Math.min(
+            1,
+            particle.alpha + sideGlow * 0.08 + proximity * 0.82 + homeProximity * 0.26
+          );
+          drawParticle(particle, scale, alpha, Math.max(proximity, homeProximity));
+        }
+
+        drawName();
+        requestAnimationFrame(tick);
+      }
+
+      resize();
+      loadPretext().then(() => {
+        measureName();
+      });
+      requestAnimationFrame(tick);
+    </script>
+  </body>
+</html>

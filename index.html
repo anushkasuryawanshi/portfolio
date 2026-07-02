@@ -8,7 +8,7 @@
       name="description"
       content="Multidisciplinary design portfolio by Anushka Suryawanshi."
     />
-    <link rel="stylesheet" href="styles.css?v=19" />
+    <link rel="stylesheet" href="styles.css?v=22" />
   </head>
   <body>
     <nav class="top-nav" id="topNav" aria-label="Primary navigation">
@@ -62,13 +62,21 @@
             </div>
           </a>
 
-          <article class="project-card project-card--wide">
+          <a class="project-card" href="#skate" data-project="skate" aria-label="View the Skate project">
+            <img src="assets/project-skate.png" alt="Skate board industrial design study" />
+            <div class="project-meta">
+              <h3>Skate</h3>
+              <p>Research / Fun-based Industrial Design</p>
+            </div>
+          </a>
+
+          <a class="project-card project-card--wide" href="#walkway-canopy" data-project="walkway" aria-label="View the Walkway Canopy project">
             <img src="assets/project-walkway.png" alt="Walkway canopy graphics" />
             <div class="project-meta">
               <h3>Walkway Canopy</h3>
               <p>Spatial Graphics / Installation</p>
             </div>
-          </article>
+          </a>
 
           <a class="project-card" href="#chandigarh-chair" data-project="chair" aria-label="View the Chandigarh Chair project">
             <img src="assets/project-chair.jpg" alt="Chandigarh Chair study" />
@@ -106,39 +114,27 @@
 
       <section class="scope" aria-labelledby="scope-title">
         <div class="section-label">SCOPE</div>
-        <h2 id="scope-title">Four ways into the work.</h2>
+        <h2 id="scope-title">Objects, packaging, spaces, print.</h2>
         <div class="scope-grid">
           <article>
             <span>01</span>
             <h3>Objects</h3>
-            <p>
-              Interfaces between the body and the world, where material,
-              weight, light, and touch shape how something is felt.
-            </p>
+            <p>Material, weight, light, touch.</p>
           </article>
           <article>
             <span>02</span>
             <h3>Packaging</h3>
-            <p>
-              Shelf-ready systems shaped through structure, CAD, die-lines,
-              material selection, renders, and digital-ready assets.
-            </p>
+            <p>Structure, unboxing, brand systems.</p>
           </article>
           <article>
             <span>03</span>
             <h3>Spaces</h3>
-            <p>
-              Layouts, signage, lighting, and graphics that guide how people
-              move, pause, notice, and feel an environment.
-            </p>
+            <p>Graphics, signage, movement, atmosphere.</p>
           </article>
           <article>
             <span>04</span>
             <h3>Print</h3>
-            <p>
-              Layering, paper, ink, embossing, and physical processes that make
-              ideas tactile, memorable, and precise.
-            </p>
+            <p>Paper, layering, finish, tactility.</p>
           </article>
         </div>
       </section>
@@ -205,7 +201,7 @@
         <div class="project-modal__images" id="modalImages" tabindex="0" aria-label="Project image gallery"></div>
 
         <aside class="project-modal__details">
-          <div class="project-modal__index">01 / Overview</div>
+          <div class="project-modal__index" id="modalIndex">01 / Overview</div>
           <div class="project-modal__copy">
             <p class="project-modal__kicker" id="modalKicker"></p>
             <h2 id="modalTitle"></h2>
@@ -221,6 +217,6 @@
       </section>
     </div>
 
-    <script src="script.js?v=19"></script>
+    <script src="script.js?v=31"></script>
   </body>
 </html>
