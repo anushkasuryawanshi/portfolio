@@ -153,8 +153,6 @@ body.light-mode .top-nav {
   text-transform: uppercase;
 }
 
-.work-intro h2,
-.scope h2,
 .about h2 {
   margin: 0;
   font-size: clamp(34px, 5.4vw, 86px);
@@ -163,7 +161,15 @@ body.light-mode .top-nav {
   letter-spacing: 0;
 }
 
-.scope {
+.work-intro h2 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0;
+}
+
+.clients {
   position: relative;
   z-index: 5;
   padding: 112px 18px 124px;
@@ -174,69 +180,94 @@ body.light-mode .top-nav {
   gap: clamp(24px, 5vw, 84px);
 }
 
-.scope .section-label {
+.clients::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.34;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.075) 1px, transparent 1px);
+  background-size: 16px 16px;
+  mask-image: linear-gradient(180deg, transparent, #000 18%, #000 82%, transparent);
+}
+
+.clients .section-label,
+.clients-list {
+  position: relative;
+  z-index: 1;
+}
+
+.clients .section-label {
   color: rgba(255, 255, 255, 0.52);
+  font-size: clamp(16px, 1.6vw, 24px);
 }
 
-.scope-grid {
+.clients-list {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 0;
-  margin-top: 74px;
+  margin: 78px 0 0;
+  padding: 0;
+  list-style: none;
   border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.clients-list a {
+  display: grid;
+  grid-template-columns: 62px minmax(220px, 0.56fr) minmax(200px, 0.44fr) 28px;
+  gap: 22px;
+  align-items: baseline;
+  padding: 17px 0 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.22);
+  color: var(--white);
+  transition: color 180ms ease, background 180ms ease, padding 180ms ease;
 }
 
-.scope-grid article {
-  min-height: 295px;
-  padding: 18px 18px 20px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0)),
-    var(--ink);
-  display: flex;
-  flex-direction: column;
-  border-right: 1px solid rgba(255, 255, 255, 0.16);
-  transition: background 240ms ease, color 240ms ease;
-}
-
-.scope-grid article:last-child {
-  border-right: 0;
-}
-
-.scope-grid article:hover {
-  background: var(--paper);
-  color: var(--ink);
-}
-
-.scope-grid span {
+.clients-list a::after {
+  content: "↗";
+  justify-self: end;
   color: rgba(255, 255, 255, 0.42);
-  font-size: 12px;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  transition: color 240ms ease;
+  font-size: 18px;
+  font-weight: 300;
+  transition: color 180ms ease, transform 180ms ease;
 }
 
-.scope-grid h3 {
-  margin: auto 0 14px;
-  font-size: clamp(28px, 3.7vw, 56px);
+.clients-list a:hover {
+  padding-left: 12px;
+  color: var(--project-accent, #bfc7bf);
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.clients-list a:hover::after {
+  color: var(--project-accent, #bfc7bf);
+  transform: translate(3px, -3px);
+}
+
+.clients-list span {
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.clients-list strong {
+  font-size: clamp(23px, 3.7vw, 58px);
   font-weight: 400;
   line-height: 0.92;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
-.scope-grid p {
+.clients-list em {
   margin: 0;
-  max-width: 230px;
+  font-style: normal;
   color: rgba(255, 255, 255, 0.66);
-  font-size: 13px;
-  line-height: 1.28;
-  transition: color 240ms ease;
+  font-size: clamp(13px, 1.35vw, 18px);
+  line-height: 1.15;
 }
 
-.scope-grid article:hover span,
-.scope-grid article:hover p {
-  color: rgba(17, 17, 17, 0.58);
+.clients-list a:hover span,
+.clients-list a:hover em {
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .projects {
@@ -244,6 +275,7 @@ body.light-mode .top-nav {
   z-index: 5;
   height: max(100vh, var(--projects-height, 120vh));
   padding-top: 0;
+  padding-bottom: clamp(72px, 9vh, 128px);
   background: var(--paper);
   color: var(--ink);
   overflow: visible;
@@ -276,6 +308,10 @@ body.light-mode .top-nav {
   object-fit: cover;
   background: #d9d8d3;
   filter: saturate(0.92) contrast(1.02);
+}
+
+.project-card__image--neoconda {
+  object-position: 58% center;
 }
 
 .project-meta {
@@ -408,6 +444,14 @@ body.light-mode .top-nav {
   background: #151515;
 }
 
+.project-modal__images--short::after {
+  content: "";
+  display: block;
+  height: 42vh;
+  min-height: 320px;
+  background: #151515;
+}
+
 .project-modal__figure {
   position: relative;
   margin: 0;
@@ -419,7 +463,8 @@ body.light-mode .top-nav {
   border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-.project-modal__figure img {
+.project-modal__figure img,
+.project-modal__figure video {
   display: block;
   width: 100%;
   height: auto;
@@ -457,7 +502,7 @@ body.light-mode .top-nav {
   background: rgba(12, 12, 12, 0.76);
   backdrop-filter: blur(8px);
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.25;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -508,6 +553,38 @@ body.light-mode .top-nav {
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
+}
+
+.project-modal__edit-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.project-modal__edit-controls button {
+  min-height: 28px;
+  padding: 0 9px;
+  cursor: pointer;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid rgba(17, 17, 17, 0.28);
+  font: inherit;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.project-modal__edit-controls button:disabled {
+  cursor: default;
+  opacity: 0.38;
+}
+
+.project-modal.is-editing [contenteditable="true"] {
+  outline: 1px dashed var(--project-accent, #686963);
+  outline-offset: 4px;
 }
 
 .project-modal__copy {
@@ -567,6 +644,51 @@ body.light-mode .top-nav {
   content: "•";
   color: var(--project-accent, currentColor);
   margin-right: 8px;
+}
+
+.project-modal__links {
+  display: flex;
+  align-items: start;
+}
+
+.project-modal__links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 144px;
+  min-height: 38px;
+  padding: 0 4px 0 16px;
+  border: 1.25px solid var(--ink);
+  border-radius: 999px;
+  color: var(--ink);
+  background: transparent;
+  box-shadow: none;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 1;
+  text-transform: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.project-modal__links a::after {
+  content: "↗";
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  margin-left: 12px;
+  border-radius: 50%;
+  color: #f5f4ef;
+  background: var(--ink);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+.project-modal__links a:hover {
+  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--project-accent, #686963) 12%, transparent);
 }
 
 .project-modal__body strong {
@@ -730,33 +852,32 @@ body.light-mode .top-nav {
     text-align: left;
   }
 
-  .scope {
+  .clients {
     grid-template-columns: 1fr;
     gap: 14px;
     padding: 78px 14px 86px;
   }
 
-  .scope-grid {
-    grid-template-columns: 1fr;
+  .clients-list {
     margin-top: 42px;
   }
 
-  .scope-grid article {
-    min-height: 176px;
-    padding: 14px;
-    border-right: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  .clients-list a {
+    grid-template-columns: 38px 1fr 22px;
+    gap: 12px;
+    padding: 14px 0 15px;
   }
 
-  .scope-grid article:last-child {
-    border-bottom: 0;
+  .clients-list a:hover {
+    padding-left: 0;
   }
 
-  .scope-grid h3 {
-    font-size: clamp(30px, 8vw, 42px);
+  .clients-list strong {
+    font-size: clamp(22px, 7vw, 33px);
   }
 
-  .scope-grid p {
+  .clients-list em {
+    grid-column: 2 / 3;
     font-size: 14px;
   }
 
@@ -782,10 +903,6 @@ body.light-mode .top-nav {
   }
 
   .projects-row {
-    grid-template-columns: 1fr;
-  }
-
-  .scope-grid {
     grid-template-columns: 1fr;
   }
 }

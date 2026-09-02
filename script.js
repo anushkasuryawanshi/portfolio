@@ -11,6 +11,9 @@ const modalBody = document.getElementById("modalBody");
 const modalIndex = document.getElementById("modalIndex");
 const modalDiscipline = document.getElementById("modalDiscipline");
 const modalMeta = document.getElementById("modalMeta");
+const modalEditToggle = document.getElementById("modalEditToggle");
+const modalEditSave = document.getElementById("modalEditSave");
+const modalEditReset = document.getElementById("modalEditReset");
 
 const projectData = {
   toru: {
@@ -43,26 +46,11 @@ const projectData = {
         }
       },
       {
-        src: "assets/toru-form-mechanism.png",
-        alt: "Close-up of a hand pressing the top surface of the Toru lamp to switch it on",
-        caption: "Toru / Form and mechanism",
-        copy: {
-          index: "03 / FORM & MECHANISM",
-          kicker: "Form & Mechanism",
-          title: "Integrated interaction. Minimal construction.",
-          paragraphs: [
-            "A gentle press-to-toggle mechanism on the top surface switches the lamp on or off, eliminating external switches and maintaining a seamless form. The lamp is constructed from 3D-printed components with a frosted ribbed translucent diffuser to soften the light and an opaque upper housing that conceals the electronics. The modular construction simplifies assembly while maintaining a clean, uninterrupted silhouette."
-          ],
-          discipline: "Industrial design",
-          meta: "Form & mechanism"
-        }
-      },
-      {
         src: "assets/toru-prototype-outcome.png",
         alt: "Final Toru prototype glowing warmly against an orange background",
         caption: "Toru / Prototype and outcome",
         copy: {
-          index: "04 / PROTOTYPE & OUTCOME",
+          index: "03 / PROTOTYPE & OUTCOME",
           kicker: "Prototype & Outcome",
           title: "From concept to prototype.",
           paragraphs: [
@@ -71,6 +59,36 @@ const projectData = {
           ],
           discipline: "Industrial design",
           meta: "Prototype outcome"
+        }
+      },
+      {
+        src: "assets/toru-lamp-breakdown.png",
+        alt: "Technical line drawing breaking down the Toru lamp cap, LED module, body, and diffuser",
+        caption: "Toru / Lamp breakdown",
+        copy: {
+          index: "04 / LAMP BREAKDOWN",
+          kicker: "Lamp Breakdown",
+          title: "A simple stack of hidden parts.",
+          paragraphs: [
+            "The lamp is broken into a concealed cap, LED module, matte white printed body, and translucent ribbed diffuser. Each layer supports the quiet exterior while managing light, electronics, and assembly."
+          ],
+          discipline: "Industrial design",
+          meta: "Component breakdown"
+        }
+      },
+      {
+        src: "assets/toru-form-mechanism.png",
+        alt: "Close-up of a hand pressing the top surface of the Toru lamp to switch it on",
+        caption: "Toru / Form and mechanism",
+        copy: {
+          index: "05 / FORM & MECHANISM",
+          kicker: "Form & Mechanism",
+          title: "Integrated interaction. Minimal construction.",
+          paragraphs: [
+            "A gentle press-to-toggle mechanism on the top surface switches the lamp on or off, eliminating external switches and maintaining a seamless form. The lamp is constructed from 3D-printed components with a frosted ribbed translucent diffuser to soften the light and an opaque upper housing that conceals the electronics. The modular construction simplifies assembly while maintaining a clean, uninterrupted silhouette."
+          ],
+          discipline: "Industrial design",
+          meta: "Form & mechanism"
         }
       }
     ]
@@ -91,8 +109,9 @@ const projectData = {
     images: [
       { src: "assets/earthy-hero.png", alt: "Earthy luxury water purifier in a dark studio setting", caption: "Earthy / Product visualisation" },
       {
+        src: "assets/earthy-brand-logo.png",
+        alt: "Earthy logo centered on a deep green background",
         caption: "Earthy / Brand system",
-        placeholder: "Image space reserved",
         copy: {
           index: "02 / BRAND SYSTEM",
           kicker: "Brand System",
@@ -105,8 +124,9 @@ const projectData = {
         }
       },
       {
+        src: "assets/earthy-user-manual.gif",
+        alt: "Animated sequence of Earthy user manual spreads showing specifications, diagrams, installation, and maintenance pages",
         caption: "Earthy / User manual",
-        placeholder: "Image space reserved",
         copy: {
           index: "03 / USER MANUAL",
           kicker: "User Manual",
@@ -119,8 +139,9 @@ const projectData = {
         }
       },
       {
+        src: "assets/earthy-package.gif",
+        alt: "Animated Earthy packaging box opening sequence on a light studio background",
         caption: "Earthy / Packaging experience",
-        placeholder: "Image space reserved",
         copy: {
           index: "04 / PACKAGING EXPERIENCE",
           kicker: "Packaging Experience",
@@ -133,8 +154,9 @@ const projectData = {
         }
       },
       {
+        src: "assets/earthy-brand-system.gif",
+        alt: "Animated sequence of Earthy product visualisations shown one by one",
         caption: "Earthy / Product visualisation",
-        placeholder: "Image space reserved",
         copy: {
           index: "05 / PRODUCT VISUALISATION",
           kicker: "Product Visualisation",
@@ -160,7 +182,81 @@ const projectData = {
     meta: "The Frame",
     images: [
       { src: "assets/frame-hero.png", alt: "Layered black paper construction created for The Frame brochure cover", caption: "The Frame / Layered cover construction" },
-      { src: "assets/project-frame.png", alt: "The Frame print system", caption: "The Frame / Material and print detail" }
+      {
+        src: "assets/frame-architecture.png",
+        alt: "The Frame building facade with layered architectural grid",
+        caption: "The Frame / Architecture as the graphic system",
+        copy: {
+          index: "02 / ARCHITECTURE AS THE GRAPHIC SYSTEM",
+          kicker: "Translating the building into a tactile graphic language.",
+          title: "From architecture to print.",
+          paragraphs: [
+            "The brochure cover wasn't designed as an illustration of the building—it was developed from its architectural language. The façade's layered geometry, framed openings, and changing depth informed a print system that translated light, shadow, and perspective into a physical object."
+          ],
+          discipline: "Print production",
+          meta: "The Frame"
+        }
+      },
+      {
+        src: "assets/frame-facade-deconstruction.gif",
+        alt: "Animated facade deconstruction explorations for The Frame cover artwork",
+        caption: "The Frame / Deconstructing the facade",
+        copy: {
+          index: "03 / DECONSTRUCTING THE FACADE",
+          kicker: "Deconstructing the facade",
+          title: "Breaking the façade into layers.",
+          paragraphs: [
+            "The architectural elevation was simplified into a series of abstract graphic elements. Each layer was refined to preserve the rhythm of the façade while remaining manufacturable through print production."
+          ],
+          discipline: "Print production",
+          meta: "The Frame"
+        }
+      },
+      {
+        src: "assets/frame-print-construction-layout.png",
+        alt: "Layered print construction diagram for The Frame cover showing Met PET, black cutout, debossed layer, and final artwork",
+        caption: "The Frame / Print construction",
+        copy: {
+          index: "04 / PRINT CONSTRUCTION",
+          kicker: "Print Construction",
+          title: "Designing for production.",
+          paragraphs: [
+            "Rather than relying on a single printed surface, the cover was developed as a layered construction. Material thicknesses, registration, assembly, and production tolerances were considered to create depth while remaining practical for fabrication."
+          ],
+          discipline: "Print production",
+          meta: "The Frame"
+        }
+      },
+      {
+        src: "assets/frame-cover.png",
+        alt: "Finished black Frame brochure cover photographed on a textured light surface",
+        caption: "The Frame / Prototyping",
+        copy: {
+          index: "05 / PROTOTYPING",
+          kicker: "Prototyping",
+          title: "Iterating through prototypes.",
+          paragraphs: [
+            "Multiple prototypes were produced to evaluate depth, spacing, shadow behaviour, and assembly. Small adjustments to layer thickness and positioning significantly affected how the cover responded to light."
+          ],
+          discipline: "Print production",
+          meta: "The Frame"
+        }
+      },
+      {
+        src: "assets/frame-final-object.png",
+        alt: "The Frame brochure cover casting architectural light and shadow",
+        caption: "The Frame / Final object",
+        copy: {
+          index: "06 / FINAL OBJECT",
+          kicker: "Final Object",
+          title: "A brochure that behaves like architecture.",
+          paragraphs: [
+            "The finished cover transforms a printed brochure into a tactile object. Light passes through the layered construction much like it does through the building itself, reinforcing the project's architectural identity before a single page is turned."
+          ],
+          discipline: "Print production",
+          meta: "The Frame"
+        }
+      }
     ]
   },
   skate: {
@@ -197,8 +293,9 @@ const projectData = {
         }
       },
       {
+        src: "assets/skate-design-direction.png",
+        alt: "Exploded skateboard assembly render showing the deck, trucks, wheel, screws, nuts, and bearings",
         caption: "Skate / Design direction",
-        placeholder: "Image space reserved",
         copy: {
           index: "03 / Design Direction",
           kicker: "Design Direction",
@@ -257,6 +354,40 @@ const projectData = {
       }
     ]
   },
+  neoconda: {
+    accent: "#168f52",
+    index: "01 / Overview",
+    kicker: "Digital design / Neoconda",
+    title: "Translating a wireless security tool into an immersive launch site.",
+    paragraphs: [
+      "Neoconda is a pocket-sized multi-tool designed for wireless security testing. For its launch website, I helped translate a highly technical product into a clear, immersive digital experience.",
+      "My work spanned early wireframing, 3D asset refinement, rendering, and select interface design. I refined client-provided 3D models for web presentation, improving materials, lighting, reflections, and overall realism so the device could carry the site visually.",
+      "The final website paired a polished technical aesthetic with focused product storytelling and received an Awwwards mention."
+    ],
+    links: [
+      { label: "View Live Site", href: "https://neoconda.com" }
+    ],
+    discipline: "Digital design",
+    meta: "",
+    images: [
+      { src: "assets/project-neoconda-hero.png", alt: "Neoconda cybersecurity launch hero with device render", caption: "Neoconda / Digital design" },
+      {
+        src: "assets/neoconda-website-sequence.gif",
+        alt: "Animated sequence of Neoconda launch website sections",
+        caption: "Neoconda / Interface system",
+        copy: {
+          index: "02 / INTERFACE SYSTEM",
+          kicker: "Interface System",
+          title: "Designing a clear digital experience.",
+          paragraphs: [
+            "The interface direction balanced dense technical information with a cinematic product narrative. Section layouts, device renders, and screen-based UI moments were composed to explain the product's capabilities while keeping the path toward waitlist sign-ups direct."
+          ],
+          discipline: "Digital design",
+          meta: ""
+        }
+      }
+    ]
+  },
   walkway: {
     accent: "#2f8f79",
     kicker: "Spatial graphics / Leonor's Egeria",
@@ -278,15 +409,16 @@ const projectData = {
     kicker: "Furniture study / Chandigarh Chair",
     title: "A material and construction study of the iconic Chandigarh Chair.",
     paragraphs: [
-      "The project involved accurately reproducing the chair to understand its dimensions, joinery, section profiles, and structural geometry. Through machining, hand-finishing, and assembly, I studied how wood grain, material thickness, tolerances, and joint detailing influence strength, ergonomics, and visual lightness. The exercise provided valuable insight into furniture construction, precision manufacturing, and the relationship between material decisions and form."
+      "The project involved accurately reproducing the chair to understand its dimensions, joinery, section profiles, and structural geometry. Through machining, hand-finishing, and assembly, I studied how wood grain, material thickness, tolerances, and joint detailing influence strength, ergonomics, and visual lightness."
     ],
     discipline: "Furniture construction",
     meta: "Material study",
     images: [
-      { src: "assets/chair-hero.jpg", alt: "Reproduction of the Chandigarh Chair against a pale studio wall", caption: "Chandigarh Chair / Completed study" },
+      { src: "assets/chair-hero.png", alt: "Reproduction of the Chandigarh Chair against a soft studio backdrop", caption: "Chandigarh Chair / Completed study" },
       {
+        src: "assets/chair-construction.png",
+        alt: "Illustrated Chandigarh Chair joinery diagram with labelled construction details",
         caption: "Chandigarh Chair / Construction study",
-        placeholder: "Image space reserved",
         copy: {
           index: "02 / UNDERSTANDING THE CONSTRUCTION",
           kicker: "Understanding the Construction",
@@ -299,8 +431,9 @@ const projectData = {
         }
       },
       {
+        src: "assets/chair-making.png",
+        alt: "Black and white collage showing Chandigarh Chair woodworking and assembly process",
         caption: "Chandigarh Chair / Making",
-        placeholder: "Image space reserved",
         copy: {
           index: "03 / MAKING",
           kicker: "Making",
@@ -313,8 +446,9 @@ const projectData = {
         }
       },
       {
+        src: "assets/chair-final-outcome-color.png",
+        alt: "Person seated in the finished Chandigarh Chair prototype in a warm color outdoor scene",
         caption: "Chandigarh Chair / Final outcome",
-        placeholder: "Image space reserved",
         copy: {
           index: "04 / FINAL OUTCOME",
           kicker: "Final Outcome",
@@ -342,8 +476,9 @@ const projectData = {
     images: [
       { src: "assets/project-retrace.jpg", alt: "Retrace coffee table book and custom birch plywood presentation box", caption: "Retrace / Birch plywood presentation box" },
       {
+        src: "assets/retrace-design-development.gif",
+        alt: "Animated design development views showing the Retrace box hinge and flap construction",
         caption: "Retrace / Design development",
-        placeholder: "Image space reserved",
         copy: {
           index: "02 / DESIGN DEVELOPMENT",
           kicker: "Design Development",
@@ -356,24 +491,11 @@ const projectData = {
         }
       },
       {
-        caption: "Retrace / Prototyping",
-        placeholder: "Image space reserved",
-        copy: {
-          index: "03 / PROTOTYPING",
-          kicker: "Prototyping",
-          title: "Translating ideas into physical form.",
-          paragraphs: [
-            "Using Fusion 360, I developed 3D models for a range of presentation box concepts, testing proportions, assembly methods, and interaction. While several explorations were eventually set aside, they informed the detailing and feasibility of the final solution."
-          ],
-          discipline: "Packaging / Product direction",
-          meta: "Prototyping"
-        }
-      },
-      {
+        src: "assets/retrace-material-detail.png",
+        alt: "Open Retrace birch plywood presentation box holding the green coffee table book",
         caption: "Retrace / Material and detail",
-        placeholder: "Image space reserved",
         copy: {
-          index: "04 / MATERIAL & DETAIL",
+          index: "03 / MATERIAL & DETAIL",
           kicker: "Material & Detail",
           title: "Refining the object.",
           paragraphs: [
@@ -384,10 +506,11 @@ const projectData = {
         }
       },
       {
+        src: "assets/retrace-outcome.jpg",
+        alt: "Retrace coffee table book displayed in front of a custom birch plywood presentation box",
         caption: "Retrace / Outcome",
-        placeholder: "Image space reserved",
         copy: {
-          index: "05 / OUTCOME",
+          index: "04 / OUTCOME",
           kicker: "Outcome",
           title: "Presenting the brand as an object.",
           paragraphs: [
@@ -404,7 +527,12 @@ const projectData = {
 let ticking = false;
 let lastFocusedElement = null;
 let activeProject = null;
+let activeProjectId = null;
 let activeModalCopyIndex = -1;
+let editMode = false;
+const editableFields = [modalIndex, modalKicker, modalTitle, modalBody, modalDiscipline, modalMeta];
+const textEditsKey = "portfolioProjectTextEdits";
+const textEdits = JSON.parse(window.localStorage.getItem(textEditsKey) || "{}");
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
@@ -431,9 +559,11 @@ function updateProjects(scrollY) {
   const rowWidth = projectsRow.scrollWidth;
   const travel = Math.max(rowWidth - window.innerWidth + 36, 0);
   const rowHeight = projectsRow.offsetHeight;
+  const projectsStyle = window.getComputedStyle(projectsSection);
+  const projectsBottomPadding = parseFloat(projectsStyle.paddingBottom) || 0;
   const sectionHeight = Math.max(
     window.innerHeight,
-    travel + rowHeight + window.innerHeight * 0.18
+    travel + rowHeight + projectsBottomPadding + window.innerHeight * 0.18
   );
 
   projectsSection.style.setProperty("--projects-height", `${sectionHeight}px`);
@@ -485,32 +615,70 @@ function createProjectFigure(image, index) {
   return figure;
 }
 
-function renderProjectText(project, copy = project) {
-  modalIndex.textContent = copy.index || project.index || "01 / Overview";
-  modalKicker.textContent = copy.kicker || project.kicker;
-  modalTitle.textContent = copy.title || project.title;
-  modalDiscipline.textContent = copy.discipline || project.discipline;
-  modalMeta.textContent = copy.meta || project.meta;
+function getEditKey(projectId, index) {
+  const image = activeProject?.images[index];
+  return `${projectId}:${image?.src || index}`;
+}
+
+function saveTextEdits() {
+  window.localStorage.setItem(textEditsKey, JSON.stringify(textEdits));
+}
+
+function setEditMode(on) {
+  editMode = on;
+  modal.classList.toggle("is-editing", on);
+  editableFields.forEach((field) => {
+    field.contentEditable = String(on);
+    field.spellcheck = on;
+  });
+  modalEditToggle.textContent = on ? "Editing" : "Edit text";
+  modalEditSave.disabled = !on;
+}
+
+function updateResetState() {
+  if (!activeProjectId || activeModalCopyIndex < 0) {
+    modalEditReset.disabled = true;
+    return;
+  }
+
+  modalEditReset.disabled = !textEdits[getEditKey(activeProjectId, activeModalCopyIndex)];
+}
+
+function renderProjectText(project, copy = project, index = 0) {
+  setEditMode(false);
+  const savedCopy = activeProjectId ? textEdits[getEditKey(activeProjectId, index)] : null;
+  const hideMeta = activeProjectId === "neoconda";
+
+  modalIndex.textContent = savedCopy?.index || copy.index || project.index || "01 / Overview";
+  modalKicker.textContent = savedCopy?.kicker || copy.kicker || project.kicker;
+  modalTitle.textContent = savedCopy?.title || copy.title || project.title;
+  modalDiscipline.textContent = savedCopy?.discipline || copy.discipline || project.discipline;
+  modalMeta.textContent = hideMeta ? "" : savedCopy?.meta || copy.meta || project.meta;
 
   const paragraphs = copy.paragraphs || project.paragraphs;
   modalBody.replaceChildren();
   modalBody.classList.toggle("is-single", paragraphs.length === 1);
-  paragraphs.forEach((text) => {
-    const paragraph = document.createElement("p");
-    const lead = copy.lead || project.lead;
 
-    if (lead && text.startsWith(lead)) {
-      const strong = document.createElement("strong");
-      strong.textContent = lead;
-      paragraph.append(strong, document.createTextNode(text.slice(lead.length)));
-    } else {
-      paragraph.textContent = text;
-    }
+  if (savedCopy?.bodyHtml) {
+    modalBody.innerHTML = savedCopy.bodyHtml;
+  } else {
+    paragraphs.forEach((text) => {
+      const paragraph = document.createElement("p");
+      const lead = copy.lead || project.lead;
 
-    modalBody.append(paragraph);
-  });
+      if (lead && text.startsWith(lead)) {
+        const strong = document.createElement("strong");
+        strong.textContent = lead;
+        paragraph.append(strong, document.createTextNode(text.slice(lead.length)));
+      } else {
+        paragraph.textContent = text;
+      }
 
-  if (copy.bullets?.length) {
+      modalBody.append(paragraph);
+    });
+  }
+
+  if (!savedCopy?.bodyHtml && copy.bullets?.length) {
     const list = document.createElement("ul");
     list.className = "project-modal__bullets";
 
@@ -522,10 +690,28 @@ function renderProjectText(project, copy = project) {
 
     modalBody.append(list);
   }
+
+  if (!savedCopy?.bodyHtml && copy.links?.length) {
+    const links = document.createElement("div");
+    links.className = "project-modal__links";
+
+    copy.links.forEach((item) => {
+      const link = document.createElement("a");
+      link.href = item.href;
+      link.textContent = item.label;
+      link.target = "_blank";
+      link.rel = "noreferrer";
+      links.append(link);
+    });
+
+    modalBody.append(links);
+  }
+
+  updateResetState();
 }
 
 function syncModalTextWithImage() {
-  if (!activeProject) return;
+  if (!activeProject || editMode) return;
 
   const figures = Array.from(modalImages.querySelectorAll(".project-modal__figure"));
   if (!figures.length) return;
@@ -540,7 +726,7 @@ function syncModalTextWithImage() {
   if (index === activeModalCopyIndex) return;
 
   activeModalCopyIndex = index;
-  renderProjectText(activeProject, activeProject.images[index]?.copy || activeProject);
+  renderProjectText(activeProject, activeProject.images[index]?.copy || activeProject, index);
 }
 
 function openProject(projectId, trigger) {
@@ -549,12 +735,14 @@ function openProject(projectId, trigger) {
 
   lastFocusedElement = trigger;
   activeProject = project;
+  activeProjectId = projectId;
   activeModalCopyIndex = -1;
   modalDiscipline.textContent = project.discipline;
   modalMeta.textContent = project.meta;
   modal.style.setProperty("--project-accent", project.accent);
 
   modalImages.replaceChildren(...project.images.map(createProjectFigure));
+  modalImages.classList.toggle("project-modal__images--short", project.images.length <= 2);
   modalImages.scrollTop = 0;
   syncModalTextWithImage();
   modalLayer.classList.add("is-open");
@@ -567,7 +755,9 @@ function closeProject() {
   modalLayer.classList.remove("is-open");
   modalLayer.setAttribute("aria-hidden", "true");
   document.body.classList.remove("modal-open");
+  setEditMode(false);
   activeProject = null;
+  activeProjectId = null;
   activeModalCopyIndex = -1;
   if (lastFocusedElement) lastFocusedElement.focus();
 }
@@ -587,14 +777,45 @@ modalLayer.addEventListener("click", (event) => {
 
 modalImages.addEventListener("scroll", syncModalTextWithImage);
 
+modalEditToggle.addEventListener("click", () => {
+  setEditMode(!editMode);
+  if (!editMode) return;
+  modalTitle.focus();
+});
+
+modalEditSave.addEventListener("click", () => {
+  if (!activeProjectId || activeModalCopyIndex < 0) return;
+
+  textEdits[getEditKey(activeProjectId, activeModalCopyIndex)] = {
+    index: modalIndex.textContent.trim(),
+    kicker: modalKicker.textContent.trim(),
+    title: modalTitle.textContent.trim(),
+    bodyHtml: modalBody.innerHTML,
+    discipline: modalDiscipline.textContent.trim(),
+    meta: modalMeta.textContent.trim()
+  };
+  saveTextEdits();
+  setEditMode(false);
+  updateResetState();
+});
+
+modalEditReset.addEventListener("click", () => {
+  if (!activeProjectId || activeModalCopyIndex < 0) return;
+
+  delete textEdits[getEditKey(activeProjectId, activeModalCopyIndex)];
+  saveTextEdits();
+  renderProjectText(activeProject, activeProject.images[activeModalCopyIndex]?.copy || activeProject, activeModalCopyIndex);
+});
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape" && modalLayer.classList.contains("is-open")) {
     closeProject();
   }
 
   if (event.key === "Tab" && modalLayer.classList.contains("is-open")) {
-    const focusable = [modalImages, modalClose];
+    const focusable = [modalImages, modalEditToggle, modalEditSave, modalEditReset, modalClose].filter((element) => !element.disabled);
     const currentIndex = focusable.indexOf(document.activeElement);
+    if (currentIndex === -1) return;
     if (event.shiftKey && currentIndex <= 0) {
       event.preventDefault();
       modalImages.focus();
