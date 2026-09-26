@@ -588,9 +588,9 @@ function updateScrollEffects() {
   ticking = false;
 }
 
-function createProjectFigure(image, index) {
+function createProjectFigure(image, index, projectId = "") {
   const figure = document.createElement("figure");
-  figure.className = `project-modal__figure${index === 0 ? " project-modal__figure--hero" : ""}`;
+  figure.className = `project-modal__figure${index === 0 ? " project-modal__figure--hero" : ""}${projectId ? ` project-modal__figure--${projectId}-${index}` : ""}`;
   figure.dataset.index = index;
 
   if (image.src) {
@@ -741,7 +741,7 @@ function openProject(projectId, trigger) {
   modalMeta.textContent = project.meta;
   modal.style.setProperty("--project-accent", project.accent);
 
-  modalImages.replaceChildren(...project.images.map(createProjectFigure));
+  modalImages.replaceChildren(...project.images.map((image, index) => createProjectFigure(image, index, projectId)));
   modalImages.classList.toggle("project-modal__images--short", project.images.length <= 2);
   modalImages.scrollTop = 0;
   syncModalTextWithImage();
